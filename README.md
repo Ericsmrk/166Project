@@ -3,6 +3,8 @@
 
 # Software Used:
 # VSCode (Python Extension)
+# Python code for the book Artificial Intelligence: A Modern Approach
+# Reference: https://github.com/aimacode/aima-python
 # Discord
 # Github
 #
@@ -21,7 +23,7 @@
 #
 #
 # Eric Smrkovsky:
-#
+# Found/added support files
 #
 #
 # Monica Kann:
