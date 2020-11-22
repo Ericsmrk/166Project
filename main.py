@@ -1,6 +1,6 @@
 from world import *
 from CustomMDP import *
-from Transitions import *
+#from Transitions import *
 from mdp import * #pythonMaster.
 
 # for state in world1:
@@ -54,7 +54,11 @@ terminals = ['end']
 init = 'class1'
 
 #original#our_mdp = CustomMDP(init, terminals, t, rewards, gamma=.9)
-our_mdp = CustomMDP(t, rewards, terminals, init, gamma=.9)
-print("mem:", our_mdp)
+our_mdp = CustomMDP(init, terminals, t, rewards, gamma=.9) #(t, rewards, terminals, init, gamma=.9)
 
-value_iteration(our_mdp)
+print(our_mdp.reward.keys())
+print(our_mdp.states)
+print(our_mdp.transitions.keys())
+print("mem:", our_mdp.check_consistency())
+
+#value_iteration(our_mdp)

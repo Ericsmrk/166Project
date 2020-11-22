@@ -14,4 +14,4 @@ class CustomMDP(MDP):
         if action is None:
             return [(0.0, state)]
         else: 
-            return self.t[state][action]
+            return self.transition_matrix[state][action]
