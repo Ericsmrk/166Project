@@ -14,6 +14,8 @@
 
 # How To Run
 # Python 3.9.0
+# Python 3.8
+# pip install numpy==1.19.3
 
 # Contributions
 # -------------
