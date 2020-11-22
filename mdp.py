@@ -13,7 +13,7 @@ from collections import defaultdict
 
 import numpy as np
 
-from pythonMaster.utils import vector_add, orientations, turn_right, turn_left
+from utils import vector_add, orientations, turn_right, turn_left
 
 
 class MDP:
