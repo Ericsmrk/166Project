@@ -3,6 +3,7 @@
 
 # Software Used:
 # VSCode (Python Extension)
+# Jupyter Notebook
 # Python code for the book Artificial Intelligence: A Modern Approach
 # Reference: https://github.com/aimacode/aima-python
 # Discord
