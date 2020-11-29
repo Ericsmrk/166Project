@@ -133,7 +133,7 @@ class GridMDP(MDP):
     An action is an (x, y) unit vector; e.g. (1, 0) means move east."""
 
     # gamma changed from 0.9 to 1
-    def __init__(self, grid, terminals, init=(0, 0), gamma=1):
+    def __init__(self, grid, terminals, init=(0, 0), gamma=.9):
         grid.reverse()  # because we want row 0 on bottom, not on top
         reward = {}
         states = set()
