@@ -213,6 +213,7 @@ def value_iteration(mdp, epsilon=0.001):
                                        for a in mdp.actions(s))
             delta = max(delta, abs(U1[s] - U[s]))
         if delta <= epsilon * (1 - gamma) / gamma:
+            # print("Value Iteration: ", U)
             return U
 
 
