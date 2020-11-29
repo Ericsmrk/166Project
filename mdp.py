@@ -132,9 +132,8 @@ class GridMDP(MDP):
     (unreachable state). Also, you should specify the terminal states.
     An action is an (x, y) unit vector; e.g. (1, 0) means move east."""
 
-    # init changed from (0,0) to (1,1)
     # gamma changed from 0.9 to 1
-    def __init__(self, grid, terminals, init=(1, 1), gamma=1):
+    def __init__(self, grid, terminals, init=(0, 0), gamma=1):
         grid.reverse()  # because we want row 0 on bottom, not on top
         reward = {}
         states = set()
@@ -160,9 +159,8 @@ class GridMDP(MDP):
     def calculate_T(self, state, action):
         if action:
             return [(0.8, self.go(state, action)),
-                    (0.1, self.go(state, turn_right(action)))
-                    # ,
-                    # (0.1, self.go(state, turn_left(action)))
+                    (0.2, self.go(state, turn_right(action)))
+                    # ,(0.1, self.go(state, turn_left(action)))
                     ]
         else:
             return [(0.0, state)]
@@ -193,6 +191,10 @@ class GridMDP(MDP):
 
 """ [Figure 17.1]
 A 4x3 grid environment that presents the agent with a sequential decision problem.
+[
+    [-0.04, -0.04, -0.04, +1],
+    [-0.04, None, -0.04, -1],
+    [-0.04, -0.04, -0.04, -0.04]],
 """
 
 sequential_decision_environment = GridMDP([[-0.04, -0.04, -0.04, +1],
@@ -213,6 +215,8 @@ def value_iteration(mdp, epsilon=0.001):
         U = U1.copy()
         delta = 0
         for s in mdp.states:
+            print("State: ", s)
+            print("Actions: ", mdp.actions(s))
             U1[s] = R(s) + gamma * max(sum(p * U[s1] for (p, s1) in T(s, a))
                                        for a in mdp.actions(s))
             delta = max(delta, abs(U1[s] - U[s]))
