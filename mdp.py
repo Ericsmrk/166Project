@@ -134,7 +134,7 @@ class GridMDP(MDP):
 
     # init changed from (0,0) to (1,1)
     # gamma changed from 0.9 to 1
-    def __init__(self, grid, terminals, init=(1, 1), gamma=1):
+    def __init__(self, grid, terminals, init=(0, 0), gamma=1):
         grid.reverse()  # because we want row 0 on bottom, not on top
         reward = {}
         states = set()
@@ -160,10 +160,11 @@ class GridMDP(MDP):
     def calculate_T(self, state, action):
         if action:
             return [(0.8, self.go(state, action)),
-                    (0.1, self.go(state, turn_right(action)))
+                    (0.2, self.go(state, turn_right(action)))
+                    
                     # ,
                     # (0.1, self.go(state, turn_left(action)))
-                    ]
+                   ]
         else:
             return [(0.0, state)]
 
@@ -213,6 +214,8 @@ def value_iteration(mdp, epsilon=0.001):
         U = U1.copy()
         delta = 0
         for s in mdp.states:
+            print("STATE: ",s)
+            print("ACTIONS: ",mdp.actions(s))
             U1[s] = R(s) + gamma * max(sum(p * U[s1] for (p, s1) in T(s, a))
                                        for a in mdp.actions(s))
             delta = max(delta, abs(U1[s] - U[s]))
