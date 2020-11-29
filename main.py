@@ -1,64 +1,54 @@
-from world import *
-from CustomMDP import *
-#from Transitions import *
-from mdp import * #pythonMaster.
+#Trying an example
+from mdp import *
+from reinforcement_learning import *
 
-# for state in world1:
-#     print(state)
 
-#sample transition matrix
-t = {
-    'leisure': {
-                    'facebook': {'leisure':0.9, 'class1':0.1},
-                    'quit': {'leisure':0.1, 'class1':0.9},
-                    'study': {},
-                    'sleep': {},
-                    'pub': {}
-               },
-    'class1': {
-                    'study': {'class2':0.6, 'leisure':0.4},
-                    'facebook': {'class2':0.4, 'leisure':0.6},
-                    'quit': {},
-                    'sleep': {},
-                    'pub': {}
-              },
-    'class2': {
-                    'study': {'class3':0.5, 'end':0.5},
-                    'sleep': {'end':0.5, 'class3':0.5},
-                    'facebook': {},
-                    'quit': {},
-                    'pub': {},
-              },
-    'class3': {
-                    'study': {'end':0.6, 'class1':0.08, 'class2':0.16, 'class3':0.16},
-                    'pub': {'end':0.4, 'class1':0.12, 'class2':0.24, 'class3':0.24},
-                    'facebook': {},
-                    'quit': {},
-                    'sleep': {}
-              },
-    'end': {}
-}
+#note: check out the tests folder to see how all given functions are ran
+sample_sequential_decision_environment = GridMDP([[-0.04, -0.04, -0.04, +1],
+                                            [-0.04, None, -0.04, -1],
+                                           [-0.04, -0.04, -0.04, -0.04]],
+                                          terminals=[(3, 2), (3, 1)])
 
-t1 = {}
-#sample rewards
-rewards = {
-    'class1': 4,
-    'class2': 6,
-    'class3': 10,
-    'leisure': -1,
-    'end': 0
-}
+# GridMDP (Grid, terminals, initial, gama)
+shopping_world = GridMDP(
+    [[]], 
+    terminals=[(1, 2), (2, 2), (3, 2), 
+               (4, 2), (5, 2), (6, 2), 
+               (7, 2), (8, 2), (9, 2), 
+               (10, 2), (11, 2)
+    ]
+)
 
-terminals = ['end']
+print('\n\n\n\n')
+# runs valIt with sample
+V = value_iteration(sample_sequential_decision_environment, .01)
+print("Value Iteration: ", V)
 
-init = 'class1'
+print('\n\n\n\n')
 
-#original#our_mdp = CustomMDP(init, terminals, t, rewards, gamma=.9)
-our_mdp = CustomMDP(init, terminals, t, rewards, gamma=.9) #(t, rewards, terminals, init, gamma=.9)
-value_iteration(our_mdp)
-print(our_mdp.reward.keys())
-print(our_mdp.states)
-print(our_mdp.transitions.keys())
-# print("mem:", our_mdp.check_consistency())
+P = policy_iteration(sample_sequential_decision_environment)
+print("Policy Iteration: ", P)
 
-#value_iteration(our_mdp)
+print('\n\n\n\n')
+
+"""QLearner notes
+north = (0, 1)
+south = (0,-1)
+west = (-1, 0)
+east = (1, 0)
+
+q_agent.Q[(STATE, ACTION)]
+so.. in state (0,1) take action north (0,1)
+THAT qvalue (remember 4 for each node) is...
+q_agent.Q[((0, 1), (0, 1))]
+"""
+q_agent = QLearningAgent(sequential_decision_environment, Ne=5, Rplus=2, alpha=lambda n: 60. / (59 + n))
+
+for i in range(200):
+    run_single_trial(q_agent, sequential_decision_environment)
+    Qval = q_agent.Q[((0, 1), (0, 1))] #described above what is happening here
+    # A1 = q_agent.Q[((0, 1), (0, 1))]
+    # A2 = q_agent.Q[((1, 0), (0, -1))]
+    print("Qlearner: ", Qval )
+
+print('\n\n\n\n')
