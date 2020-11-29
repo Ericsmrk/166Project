@@ -1,7 +1,7 @@
 #Trying an example
 from mdp import *
 from reinforcement_learning import *
-
+# from CustomMDP import *
 
 #note: check out the tests folder to see how all given functions are ran
 sample_sequential_decision_environment = GridMDP([[-0.04, -0.04, -0.04, +1],
@@ -10,13 +10,15 @@ sample_sequential_decision_environment = GridMDP([[-0.04, -0.04, -0.04, +1],
                                           terminals=[(3, 2), (3, 1)])
 
 # GridMDP (Grid, terminals, initial, gama)
+# grid[reward]
 shopping_world = GridMDP(
-    [[]], 
-    terminals=[(1, 2), (2, 2), (3, 2), 
-               (4, 2), (5, 2), (6, 2), 
-               (7, 2), (8, 2), (9, 2), 
+    [[0.0, 10],[0.1, 9],[0.2, 8],[0.3, 7],[0.4, 6],
+    [0.5, 5],[0.6, 4],[0.7, 3],[0.8, 2],[0.9, 1],[0.10, 1]],
+    terminals=[(1, 2), (2, 2), (3, 2),
+               (4, 2), (5, 2), (6, 2),
+               (7, 2), (8, 2), (9, 2),
                (10, 2), (11, 2)
-    ]
+              ]
 )
 
 print('\n\n\n\n')

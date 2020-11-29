@@ -29,10 +29,6 @@
 # Found/added support files
 #
 #
-# Monica Kann:
-#
-#
-#
 # Michael Novella:
 #
 #
