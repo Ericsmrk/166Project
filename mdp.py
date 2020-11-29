@@ -160,7 +160,8 @@ class GridMDP(MDP):
         if action:
             return [(0.8, self.go(state, action)),
                     (0.2, self.go(state, turn_right(action)))
-
+                    # ,(0.1, self.go(state, turn_left(action)))
+                   ]
         else:
             return [(0.0, state)]
 
