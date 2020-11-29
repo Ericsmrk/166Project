@@ -23,17 +23,17 @@ sample_sequential_decision_environment = GridMDP(
 shopping_world = GridMDP(
     [
         # east, north, west, south
-        [0.10, None, None, 1],
-        [0.9, None, None, 2],
-        [0.8, None, None, 3],
-        [0.7, None, None, 4],
-        [0.6, None, None, 5],
-        [0.5, None, None, 6],
-        [0.4, None, None, 7],
-        [0.3, None, None, 8],
-        [0.2, None, None, 9],
-        [0.1, None, None, 10],
-        [11, None, None, 11],
+        [0.10, 1],  #11
+        [0.9, 2],   #10
+        [0.8, 3],   #9
+        [0.7, 4],   #8
+        [0.6, 5],   #7
+        [0.5, 6],   #6
+        [0.4, 7],   #5
+        [0.3, 8],   #4
+        [0.2, 9],   #3
+        [0.1, 10],  #2
+        [11, 11],   #1
     ],
     terminals=
     [
@@ -53,11 +53,11 @@ shopping_world = GridMDP(
 
 # runs valIt with sample
 V = value_iteration(shopping_world, .01)
-print("Value Iteration: ", V, '\n\n')
+print("Value Iteration: ", V, '\n')
 
 
-# P = policy_iteration(shopping_world)
-# print("Policy Iteration: ", P, print('\n\n'))
+P = policy_iteration(shopping_world)
+print("Policy Iteration: ", P, print('\n'))
 
 
 
