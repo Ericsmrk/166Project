@@ -133,7 +133,11 @@ class GridMDP(MDP):
     An action is an (x, y) unit vector; e.g. (1, 0) means move east."""
 
     # gamma changed from 0.9 to 1
+<<<<<<< HEAD
     def __init__(self, grid, terminals, init=(0, 0), gamma=0.9):
+=======
+    def __init__(self, grid, terminals, init=(0, 0), gamma=.9):
+>>>>>>> 9eeb96e5477e490458e65ae89ef93e3dc92eda90
         grid.reverse()  # because we want row 0 on bottom, not on top
         reward = {}
         states = set()
@@ -161,7 +165,7 @@ class GridMDP(MDP):
             return [(0.8, self.go(state, action)),
                     (0.2, self.go(state, turn_right(action)))
                     # ,(0.1, self.go(state, turn_left(action)))
-                    ]
+                   ]
         else:
             return [(0.0, state)]
 
@@ -215,8 +219,7 @@ def value_iteration(mdp, epsilon=0.001):
         U = U1.copy()
         delta = 0
         for s in mdp.states:
-            print("State: ", s)
-            print("Actions: ", mdp.actions(s))
+
             U1[s] = R(s) + gamma * max(sum(p * U[s1] for (p, s1) in T(s, a))
                                        for a in mdp.actions(s))
             delta = max(delta, abs(U1[s] - U[s]))
