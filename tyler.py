@@ -4,40 +4,50 @@ from reinforcement_learning import *
 # from CustomMDP import *
 
 #note: check out the tests folder to see how all given functions are ran
-sample_sequential_decision_environment = GridMDP([[-0.04, -0.04, -0.04, +1],
-                                            [-0.04, None, -0.04, -1],
-                                           [-0.04, -0.04, -0.04, -0.04]],
-                                          terminals=[(3, 2), (3, 1)])
-
-# GridMDP (Grid, terminals, initial, gama)
-# grid[reward]
-shopping_world = GridMDP(
+sample_sequential_decision_environment = GridMDP(
     [
-        [0.0, 10],
-        [0.1, 9],
-        [0.2, 8],
-        [0.3, 7],
-        [0.4, 6],
-        [0.5, 5],
-        [0.6, 4],
-        [0.7, 3],
-        [0.8, 2],
-        [0.9, 1],
-        [0.10, 1]
+        [-0.04, -0.04, -0.04, +1],
+        [-0.04, None, -0.04, -1],
+        [-0.04, -0.04, -0.04, -0.04]
     ],
     terminals=
     [
-        (1, 2), 
-        (2, 2), 
-        (3, 2),
-        (4, 2), 
-        (5, 2), 
-        (6, 2),
-        (7, 2), 
-        (8, 2), 
-        (9, 2),
-        (10, 2), 
-        (11, 2)
+        (3, 2), 
+        (3, 1)
+    ]
+)
+
+# GridMDP (Grid, terminals, initial, gama)
+# grid[reward]
+
+shopping_world = GridMDP(
+    [
+        # east, north, west, south
+        [0.10, None, None, 1],
+        [0.9, None, None, 2],
+        [0.8, None, None, 3],
+        [0.7, None, None, 4],
+        [0.6, None, None, 5],
+        [0.5, None, None, 6],
+        [0.4, None, None, 7],
+        [0.3, None, None, 8],
+        [0.2, None, None, 9],
+        [0.1, None, None, 10],
+        [11, None, None, 11],
+    ],
+    terminals=
+    [
+        (1,0), 
+        (1,1), 
+        (1,2),
+        (1,3), 
+        (1,4), 
+        (1,5),
+        (1,6), 
+        (1,7), 
+        (1,8),
+        (1,9), 
+        (1,0)
     ]
 )
 
@@ -46,8 +56,8 @@ V = value_iteration(shopping_world, .01)
 print("Value Iteration: ", V, '\n\n')
 
 
-P = policy_iteration(shopping_world)
-print("Policy Iteration: ", P, print('\n\n'))
+# P = policy_iteration(shopping_world)
+# print("Policy Iteration: ", P, print('\n\n'))
 
 
 
@@ -63,12 +73,12 @@ THAT qvalue (remember 4 for each node) is...
 q_agent.Q[((0, 1), (0, 1))]
 """
 # Ne was 5 now 2
-q_agent = QLearningAgent(shopping_world, Ne=2, Rplus=2, alpha=lambda n: 60. / (59 + n))
+# q_agent = QLearningAgent(shopping_world, Ne=5, Rplus=2, alpha=lambda n: 60. / (59 + n))
 
-for i in range(200):
-    run_single_trial(q_agent, shopping_world)
-    Qval = q_agent.Q[((0, 1), (0, 1))] #described above what is happening here
-    # A1 = q_agent.Q[((0, 1), (0, 1))]
-    # A2 = q_agent.Q[((1, 0), (0, -1))]
-    print("Qlearner: ", Qval, print('\n\n'))
+# for i in range(50):
+#     run_single_trial(q_agent, shopping_world)
+#     Qval = q_agent.Q[((0, 0), (1, 2))] #described above what is happening here
+#     # A1 = q_agent.Q[((0, 1), (0, 1))]
+#     # A2 = q_agent.Q[((1, 0), (0, -1))]
+#     print("Qlearner: ", Qval, print('\n\n'))
 
