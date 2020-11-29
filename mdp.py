@@ -132,7 +132,9 @@ class GridMDP(MDP):
     (unreachable state). Also, you should specify the terminal states.
     An action is an (x, y) unit vector; e.g. (1, 0) means move east."""
 
-    def __init__(self, grid, terminals, init=(0, 0), gamma=.9):
+    # init changed from (0,0) to (1,1)
+    # gamma changed from 0.9 to 1
+    def __init__(self, grid, terminals, init=(1, 1), gamma=1):
         grid.reverse()  # because we want row 0 on bottom, not on top
         reward = {}
         states = set()
