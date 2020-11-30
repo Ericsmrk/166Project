@@ -358,6 +358,8 @@ def rbf_kernel(x, y=None, gamma=None):
 
 
 orientations = EAST, NORTH, WEST, SOUTH = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+# orientations = EAST, NORTH = [(1, 0), (0, 1)]
+
 turns = LEFT, RIGHT = (+1, -1)
 
 

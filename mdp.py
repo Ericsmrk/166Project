@@ -13,7 +13,10 @@ from collections import defaultdict
 
 import numpy as np
 
-from utils import vector_add, orientations, turn_right, turn_left
+# from utils import vector_add, orientations, turn_right, turn_left
+from utils import vector_add, turn_right, turn_left, turn_heading
+
+orientations = EAST, NORTH = [(1, 0), (0, 1)]
 
 
 class MDP:
@@ -133,7 +136,7 @@ class GridMDP(MDP):
     An action is an (x, y) unit vector; e.g. (1, 0) means move east."""
 
     # gamma changed from 0.9 to 1
-    def __init__(self, grid, terminals, init=(0, 0), gamma=0.9):
+    def __init__(self, grid, terminals, init=(0, 0), gamma=0.999):
         grid.reverse()  # because we want row 0 on bottom, not on top
         reward = {}
         states = set()
@@ -158,8 +161,8 @@ class GridMDP(MDP):
 
     def calculate_T(self, state, action):
         if action:
-            return [(0.8, self.go(state, action)),
-                    (0.2, self.go(state, turn_right(action)))
+            return [(0.75, self.go(state, action)),
+                    (0.25, self.go(state, turn_right(action)))
                     # ,(0.1, self.go(state, turn_left(action)))
                    ]
         else:
@@ -206,23 +209,29 @@ sequential_decision_environment = GridMDP([[-0.04, -0.04, -0.04, +1],
 # ______________________________________________________________________________
 
 
-def value_iteration(mdp, epsilon=0.001):
+def value_iteration(mdp, epsilon=0.0001):
     """Solving an MDP by value iteration. [Figure 17.4]"""
 
     U1 = {s: 0 for s in mdp.states}
     R, T, gamma = mdp.R, mdp.T, mdp.gamma
+    i = 0
     while True:
         U = U1.copy()
         delta = 0
-        for s in mdp.states:
+        # add by Group START
+        # print('\n', "Value Iteration: ", i, '\n')
+        # for key in U1:
+        #     print(tuple(reversed(key)), ':',  "{:.1f}".format(U1[key]), '\n')
+        # i = i+1
+        # add by Group END
 
+        for s in mdp.states:
             U1[s] = R(s) + gamma * max(sum(p * U[s1] for (p, s1) in T(s, a))
                                        for a in mdp.actions(s))
             delta = max(delta, abs(U1[s] - U[s]))
         if delta <= epsilon * (1 - gamma) / gamma:
             # print("Value Iteration: ", U)
             return U
-
 
 def best_policy(mdp, U):
     """Given an MDP and a utility function U, determine the best policy,
