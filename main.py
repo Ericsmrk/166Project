@@ -95,9 +95,9 @@ print("VALUE ITERATION ON midterm_world: ", Vmw, '\n')
 
 Vsw = value_iteration(shopping_world, .01)
 print_table(shop_world, "SC")
-print("Yo show me (0,0)", Vsw[(0, 0)])
-print("Yo show me (0,1)", Vsw[(0, 1)])
-print("Yo show me (0,2)", Vsw[(0, 2)])
+print("Yo show me (0,0)", rounder(Vsw[(0, 0)], 2))
+print("Yo show me (0,1)", rounder(Vsw[(0, 1)], 2))
+print("Yo show me (0,2)", rounder(Vsw[(0, 2)], 2))
 print("VALUE ITERATION ON shopping_world: ", Vsw, '\n')
 
 # print("Value Iteration: ", Vsw, '\n')

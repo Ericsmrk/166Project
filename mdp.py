@@ -219,7 +219,7 @@ def value_iteration(mdp, epsilon=0.0001):
         U = U1.copy()
         delta = 0
         # add by Group START
-        # print('\n', "Value Iteration: ", i, '\n')
+        #print('\n', "Value Iteration: ", U, '\n')
         # for key in U1:
         #     print(tuple(reversed(key)), ':',  "{:.1f}".format(U1[key]), '\n')
         # i = i+1
