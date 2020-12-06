@@ -1,5 +1,6 @@
 #Trying an example
 from mdp import *
+from utils import *
 from reinforcement_learning import *
 # from CustomMDP import *
 
@@ -10,7 +11,7 @@ from reinforcement_learning import *
 # east, north
 
 midterm_world = GridMDP(
-    [   
+    [
     #    y
     #    0, 1
         [10, None],     #2  (0,2) (1,2)
@@ -20,41 +21,58 @@ midterm_world = GridMDP(
     terminals=
     [
         # x,y
-        (0, 2), 
+        (0, 2),
         (1, 1),
         (1, 0)
     ]
 )
+mid_world = [[10, None], [0.01, -10],[0.01, 1]]
+shop_world = [
 
+    # 0,  1 WHEN THE VALUES IN (0, ..) IS HIGHEST, WE GO TO COSTCO
+    # and that is how much money we save by going to costco
+    [10, 0.001],#10 [(0,10) (1,10)]
+    [9, 5],     #9  [(0,9) (1,9)]
+    [8, 10],     #8  [(0,8) (1,8)]
+    [7, 15],     #7  [(0,7) (1,7)]
+    [6, 19],     #6  [(0,6) (1,6)]
+    [5, 20],     #5  [(0,5) (1,5)]
+    [4, 30],     #4  [(0,4) (1,4)]
+    [3, 33],     #3  [(0,3) (1,3)]
+    [2, 42],     #2  [(0,2) (1,2)]
+    [1, 45],     #1  [(0,1) (1,1)]
+    [0.001, 50] #0  [(0,0) (1,0)]
+]
 shopping_world = GridMDP(
     [
-        
-        # 0,  1
+
+        # 0,  1 WHEN THE VALUES IN (0, ..) IS HIGHEST, WE GO TO COSTCO
+        # and that is how much money we save by going to costco
         [10, 0.001],#10 [(0,10) (1,10)]
-        [9, 1],     #9  [(0,9) (1,9)]
-        [8, 2],     #8  [(0,8) (1,8)]
-        [7, 3],     #7  [(0,7) (1,7)]
-        [6, 4],     #6  [(0,6) (1,6)]
-        [5, 5],     #5  [(0,5) (1,5)]
-        [4, 6],     #4  [(0,4) (1,4)]
-        [3, 7],     #3  [(0,3) (1,3)]
-        [2, 8],     #2  [(0,2) (1,2)]
-        [1, 9],     #1  [(0,1) (1,1)]
-        [0.001, 10] #0  [(0,0) (1,0)]
+        [9, 5],     #9  [(0,9) (1,9)]
+        [8, 10],     #8  [(0,8) (1,8)]
+        [7, 15],     #7  [(0,7) (1,7)]
+        [6, 19],     #6  [(0,6) (1,6)]
+        [5, 20],     #5  [(0,5) (1,5)]
+        [4, 30],     #4  [(0,4) (1,4)]
+        [3, 33],     #3  [(0,3) (1,3)]
+        [2, 42],     #2  [(0,2) (1,2)]
+        [1, 45],     #1  [(0,1) (1,1)]
+        [0.001, 50] #0  [(0,0) (1,0)]
     ],
     terminals=
     [
-    #    x, y  
-        (1,0), 
-        (1,1), 
+    #    x, y
+        (1,0),
+        (1,1),
         (1,2),
-        (1,3), 
-        (1,4), 
+        (1,3),
+        (1,4),
         (1,5),
-        (1,6), 
-        (1,7), 
+        (1,6),
+        (1,7),
         (1,8),
-        (1,9), 
+        (1,9),
         (1,10)
     ]
 )
@@ -66,6 +84,7 @@ print('-------------------------------------------------------------------------
 # ------------------------------------------------------------------------------VALUE ITERATION-----------------------------------------------------------------------------------------
 # runs valIt with sample
 Vmw = value_iteration(midterm_world, .01)
+print_table(mid_world)
 print("VALUE ITERATION ON midterm_world: ", Vmw, '\n')
 # print("Value Iteration: ", Vmw, '\n')
 # i = 0
@@ -75,6 +94,10 @@ print("VALUE ITERATION ON midterm_world: ", Vmw, '\n')
 #     i = i+1
 
 Vsw = value_iteration(shopping_world, .01)
+print_table(shop_world, "SC")
+print("Yo show me (0,0)", Vsw[(0, 0)])
+print("Yo show me (0,1)", Vsw[(0, 1)])
+print("Yo show me (0,2)", Vsw[(0, 2)])
 print("VALUE ITERATION ON shopping_world: ", Vsw, '\n')
 
 # print("Value Iteration: ", Vsw, '\n')
@@ -103,11 +126,11 @@ print("Policy Extraction on midterm_world: ", BPmw, '\n')
 
 BPsw = best_policy(shopping_world, value_iteration(shopping_world, .01))
 print("Policy Extraction on shopping_world: ", BPsw, '\n')
+print_table(shopping_world.to_arrows(BPsw), "", '  toCOSTCO') #showing the "way"
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 print('-----------------------------------------------------------------------------------------------------------------------------------------------------------------------', '\n')
-
 # -------------------------------------------------------------------------------QLearning----------------------------------------------------------------------------------------
 """QLearner notes
 north = (0, 1)
@@ -131,4 +154,3 @@ q_agent.Q[((0, 1), (0, 1))]
 #     print("Qlearner: ", Qval, print('\n\n'))
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
