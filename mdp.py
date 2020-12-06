@@ -14,7 +14,7 @@ from collections import defaultdict
 import numpy as np
 
 # from utils import vector_add, orientations, turn_right, turn_left
-from utils import vector_add, turn_right, turn_left, turn_heading
+from utils import vector_add, turn_right, turn_left, turn_heading, print_table, rounder
 
 orientations = EAST, NORTH = [(1, 0), (0, 1)]
 
@@ -219,7 +219,8 @@ def value_iteration(mdp, epsilon=0.0001):
         U = U1.copy()
         delta = 0
         # add by Group START
-        #print('\n', "Value Iteration: ", U, '\n')
+        # print('\n', "Value Iteration: ", U, '\n')
+
         # for key in U1:
         #     print(tuple(reversed(key)), ':',  "{:.1f}".format(U1[key]), '\n')
         # i = i+1
@@ -232,6 +233,38 @@ def value_iteration(mdp, epsilon=0.0001):
         if delta <= epsilon * (1 - gamma) / gamma:
             # print("Value Iteration: ", U)
             return U
+
+#---------------------------------------------------------------
+def value_iteration2(mdp, epsilon=0.0001):
+    """Solving an MDP by value iteration. [Figure 17.4]"""
+
+    U1 = {s: 0 for s in mdp.states}
+    R, T, gamma = mdp.R, mdp.T, mdp.gamma
+    i = 0
+    print("Midterm World w/ Value Iteration", '\n')
+    while True:
+        U = U1.copy()
+        delta = 0
+        # add by Group START
+        print('\n',"--Step", i, "--")
+        print(rounder(U1[(0, 2)], 2))
+        print(rounder(U1[(0, 1)], 2), "  ", rounder(U1[(1, 1)], 2))
+        print(rounder(U1[(0, 0)], 2), "  ", rounder(U1[(1, 0)], 2))
+        i+=1
+
+        [10, None],    #2  (0,2) (1,2)
+        [0.01, -10],   #1  (0,1) (1,1)
+        [0.01, 1]      #0  (0,0) (1,0) x
+
+        for s in mdp.states:
+            U1[s] = R(s) + gamma * max(sum(p * U[s1] for (p, s1) in T(s, a))
+                                       for a in mdp.actions(s))
+            delta = max(delta, abs(U1[s] - U[s]))
+        if delta <= epsilon * (1 - gamma) / gamma:
+            # print("Value Iteration: ", U)
+            return U
+#---------------------------------------------------------------
+
 
 def best_policy(mdp, U):
     """Given an MDP and a utility function U, determine the best policy,
