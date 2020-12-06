@@ -1,7 +1,6 @@
 #Trying an example
 from mdp import *
 from reinforcement_learning import *
-# from CustomMDP import *
 
 #note: check out the tests folder to see how all given functions are ran
 sample_sequential_decision_environment = GridMDP([[-0.04, -0.04, -0.04, +1],

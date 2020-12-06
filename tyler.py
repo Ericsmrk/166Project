@@ -1,7 +1,6 @@
 #Trying an example
 from mdp import *
 from reinforcement_learning import *
-# from CustomMDP import *
 
 # ----------------------------------------------------------------------WORLD DESC.-------------------------------------------------------------------------------------------------
 # GridMDP (Grid, terminals, initial, gama)
