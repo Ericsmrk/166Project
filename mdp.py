@@ -236,7 +236,6 @@ def value_iteration(mdp, epsilon=0.0001):
 
 #---------------------------------------------------------------
 def value_iteration2(mdp, epsilon=0.0001):
-    """Solving an MDP by value iteration. [Figure 17.4]"""
 
     U1 = {s: 0 for s in mdp.states}
     R, T, gamma = mdp.R, mdp.T, mdp.gamma
@@ -251,17 +250,14 @@ def value_iteration2(mdp, epsilon=0.0001):
         print(rounder(U1[(0, 1)], 2), "  ", rounder(U1[(1, 1)], 2))
         print(rounder(U1[(0, 0)], 2), "  ", rounder(U1[(1, 0)], 2))
         i+=1
-
-        [10, None],    #2  (0,2) (1,2)
-        [0.01, -10],   #1  (0,1) (1,1)
-        [0.01, 1]      #0  (0,0) (1,0) x
-
         for s in mdp.states:
             U1[s] = R(s) + gamma * max(sum(p * U[s1] for (p, s1) in T(s, a))
                                        for a in mdp.actions(s))
             delta = max(delta, abs(U1[s] - U[s]))
+
+        # print convergence check
+        print("delta: ", delta, "  gamma:", gamma)
         if delta <= epsilon * (1 - gamma) / gamma:
-            # print("Value Iteration: ", U)
             return U
 #---------------------------------------------------------------
 
