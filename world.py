@@ -176,4 +176,6 @@ terminalsV2= [
 ]
 
 #FIRST VERSION OF MY RANDOM SHOPPING WORLD
-Vshopping_world1 = GridMDP(genShoppingV1(), terminalsV2)
+Vshop_world = genShoppingV1()
+Vshopping_world1 = GridMDP(Vshop_world, terminalsV2)
+#Vshopping_world1 = GridMDP(genShoppingV1(), terminalsV2)
