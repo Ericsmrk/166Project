@@ -53,59 +53,43 @@ def Experiment2 (shop_world, shopping_world):
 
 
 def Experiment3(midterm_world) :
-    """QLearner notes
-north = (0, 1)
-south = (0,-1)
-west = (-1, 0)
-east = (1, 0)
 
-q_agent.Q[(STATE, ACTION)]
-so.. in state (0,1) take action north (0,1)
-THAT qvalue (remember 4 for each node) is...
-q_agent.Q[((0, 1), (0, 1))]
-"""
-    q_agent = QLearningAgent(midterm_world, Ne=5, Rplus=50, alpha=lambda n: 60. / (59 + n))
+    q_agent = QLearningAgent(midterm_world, Ne=5, Rplus=2, alpha = lambda n: 60. / (59 + n))
+    #^^^ get agent with world
+    #vvv directions
+    n = (0, 1)
+    s = (0,-1)
+    w = (-1, 0)
+    e = (1, 0)
+    dir= {(0, 1): "North ", (0,-1): "South ", (-1, 0): "West ", (1, 0): "East "}
+    states = [(0,0),(0,1),(1,0),(1,1),(2,0)] # list states here
+    iterations = 200# 1000 # run q learn how many times
+    list = [x for x in range(iterations + 1) if x % 50 == 0] # get every item div/??? in list
 
-#2  (0,2) (1,2)
-#1  (0,1) (1,1)
-#0  (0,0) (1,0) x
-
-    for i in range(100):
+    for i in range(iterations + 1):
         run_single_trial(q_agent, midterm_world)
-        print("---iteration ", i, "---")
-
-        print("(0,0)")
-        qvalN00 = q_agent.Q[((0, 0), (0, 1))] #described above what is happening here
-        qvalE00 = q_agent.Q[((0, 0), (1, 0))] #described above what is happening here
-        print("N: ", qvalN00)
-        print("E: ", qvalE00,'\n')
-
-        print("(1,0)")
-        qvalN10 = q_agent.Q[((1, 0), (1, 1))] #described above what is happening here
-        print("N: ", qvalN10, '\n')
-
-        print("(0,1)")
-        qvalN01 = q_agent.Q[((0, 1), (0, 2))] #described above what is happening here
-        qvalE01 = q_agent.Q[((0, 1), (1, 1))] #described above what is happening here
-        print("N: ", qvalN01)
-        print("E: ", qvalE01,'\n')
-
-        print("(1,1)")
-        qvalN11 = q_agent.Q[((1, 1), (1, 2))] #described above what is happening here
-        print("N: ", qvalN11, '\n')
-
-        print("(0,2)")
-        qvalN02 = q_agent.Q[((0, 2), (0, 3))] #described above what is happening here
-        qvalE02 = q_agent.Q[((0, 2), (1, 2))] #described above what is happening here
-        print("N: ", qvalN02)
-        print("E: ", qvalE02,'\n')
-
-        print("(1,2)")
-        qvalN12 = q_agent.Q[((1, 2), (1, 3))] #described above what is happening here
-        print("N: ", qvalN12, '\n')
-
-    print('\n\n\n\n')
-
+        for l in list:
+            if l == i:
+                count = 0
+                for state in states:
+                    print("\nExecuting trial ", l)
+                    #STATE(0,0)
+                    ds = q_agent.actions_in_state(states[count])
+                    print("In state",state,"can go: ")
+                    if ds == [None]:
+                        print("None available.")
+                    else:
+                        for d in ds:
+                            print(dir[d])
+                    print("Q-Values of:")#for some reason this won't run by using count
+                    print("N: ", rounder(q_agent.Q[(states[count], n)], 4))
+                    print("S: ", rounder(q_agent.Q[(states[count], s)], 4))
+                    print("E: ", rounder(q_agent.Q[(states[count], e)], 4))
+                    print("W: ", rounder(q_agent.Q[(states[count], w)], 4))
+                    count = count + 1
+                    #print(count)
+    #print(q_agent.Q,"\n")
+    print("\n\n\n")
 
 def Experiment4(shopping_world) :
     """QLearner notes
