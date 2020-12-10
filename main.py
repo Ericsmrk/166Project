@@ -6,19 +6,19 @@ from reinforcement_learning import *
 from functions import * #Experiment1, Experiment2, Experiment3, Experiment4
 
 # ------------------------------------------------------------------------------VALUE ITERATION-----------------------------------------------------------------------------------------
-# Experiment1(mid_world, midterm_world)
+Experiment1(mid_world, midterm_world)
 
 
-#Experiment2(shop_world, shopping_world)
-#Experiment3(shop_world2, shopping_world2)
-#Experiment4(Vshop_world, Vshopping_world1)
+Experiment2(shop_world, shopping_world)
+Experiment3(shop_world2, shopping_world2)
+Experiment4(Vshop_world, Vshopping_world1)
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 print('-----------------------------------------------------------------------------------------------------------------------------------------------------------------------', '\n')
 
 # -------------------------------------------------------------------------------QLearning----------------------------------------------------------------------------------------
-Experiment5(midterm_world)
+#Experiment5(midterm_world)
 
 #Experiment6(shopping_world)
 

@@ -34,11 +34,11 @@ def Experiment2 (shop_world, shopping_world):
     BPsw_1 = best_policy(shopping_world, Vsw)
     print_table(shopping_world.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
 
-def Experiment3 (shop_world, shopping_world):
-    Vsw = value_iteration(shopping_world, .01)
+def Experiment3 (shop_world2, shopping_world2):
+    Vsw = value_iteration(shopping_world2, .01)
     # print('State     Money Saved')
     print(' \n Shopping World \n Rewards of each state at the beginning.')
-    print_table(shop_world, "", '      ')
+    print_table(shop_world2, "", '      ')
 
     print('\n', "State   Money Saved")
     print(" (0,10)", " ", rounder(Vsw[(0, 10)], 2), "  Hit all 10 stores, NO COSTCO\n")
@@ -54,14 +54,14 @@ def Experiment3 (shop_world, shopping_world):
     print(" (0,0)", "  ", rounder(Vsw[(0, 0)], 2), "  Went to directly to COSTCO\n")
 
     print("Best Policy Found")
-    BPsw_1 = best_policy(shopping_world, Vsw)
-    print_table(shopping_world.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
+    BPsw_1 = best_policy(shopping_world2, Vsw)
+    print_table(shopping_world2.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
 
-def Experiment4 (shop_world, shopping_world):
-    Vsw = value_iteration(shopping_world, .01)
+def Experiment4 (Vshop_world, Vshopping_world1):
+    Vsw = value_iteration(Vshopping_world1, .01)
     # print('State     Money Saved')
     print(' \n Shopping World \n Rewards of each state at the beginning.')
-    print_table(shop_world, "", '      ')
+    print_table(Vshop_world, "", '      ')
 
     print('\n', "State   Money Saved")
     print(" (0,10)", " ", rounder(Vsw[(0, 10)], 2), "  Hit all 10 stores, NO COSTCO\n")
@@ -77,8 +77,8 @@ def Experiment4 (shop_world, shopping_world):
     print(" (0,0)", "  ", rounder(Vsw[(0, 0)], 2), "  Went to directly to COSTCO\n")
 
     print("Best Policy Found")
-    BPsw_1 = best_policy(shopping_world, Vsw)
-    print_table(shopping_world.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
+    BPsw_1 = best_policy(Vshopping_world1, Vsw)
+    print_table(Vshopping_world1.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
 
 def Experiment5(midterm_world) :
 
