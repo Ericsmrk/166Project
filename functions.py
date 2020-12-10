@@ -34,25 +34,53 @@ def Experiment2 (shop_world, shopping_world):
     BPsw_1 = best_policy(shopping_world, Vsw)
     print_table(shopping_world.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
 
-    #print_table(shopping_world.to_arrows())
-    # p1 = policy_iteration(shopping_world)
-    # print("Policy it", p1)
+def Experiment3 (shop_world, shopping_world):
+    Vsw = value_iteration(shopping_world, .01)
+    # print('State     Money Saved')
+    print(' \n Shopping World \n Rewards of each state at the beginning.')
+    print_table(shop_world, "", '      ')
 
-    # policy_evaluation(pi, U, mdp, k=20)
-    # pi = bestpolicy, U = val it or q learn, mdp = gridmdp, k = notsure yet
-    # P1e = policy_evaluation(p1, Vsw, shopping_world)
-    #print("Policy eval W/ ", P1e)
+    print('\n', "State   Money Saved")
+    print(" (0,10)", " ", rounder(Vsw[(0, 10)], 2), "  Hit all 10 stores, NO COSTCO\n")
+    print(" (0,9)","  ", rounder(Vsw[(0, 9)], 2), "  Went to 9 stores then COSTCO\n")
+    print(" (0,8)", "  ", rounder(Vsw[(0, 8)], 2), "  Went to 8 stores then COSTCO\n")
+    print(" (0,7)", "  ", rounder(Vsw[(0, 7)], 2), "  Went to 7 stores then COSTCO\n")
+    print(" (0,6)", "  ", rounder(Vsw[(0, 6)], 2), "  Went to 6 stores then COSTCO\n")
+    print(" (0,5)", "  ", rounder(Vsw[(0, 5)], 2), "  Went to 5 stores then COSTCO\n")
+    print(" (0,4)", "  ", rounder(Vsw[(0, 4)], 2), "  Went to 4 stores then COSTCO\n")
+    print(" (0,3)", "  ", rounder(Vsw[(0, 3)], 2), "  Went to 3 stores then COSTCO\n")
+    print(" (0,2)", "  ", rounder(Vsw[(0, 2)], 2), "  Went to 2 stores then COSTCO\n")
+    print(" (0,1)", "  ", rounder(Vsw[(0, 1)], 2), "  Went to 1 store then COSTCO\n")
+    print(" (0,0)", "  ", rounder(Vsw[(0, 0)], 2), "  Went to directly to COSTCO\n")
 
-    # policy_evaluation(pi, U, mdp, k=20)
-    # pi = bestpolicy, U = val it or q learn, mdp = gridmdp, k = notsure yet
-    # PEsw_1 = policy_evaluation(BPsw_1, Vsw, shopping_world, 200)
-    # print("Policy eval W/ Best Policy", PEsw_1)
+    print("Best Policy Found")
+    BPsw_1 = best_policy(shopping_world, Vsw)
+    print_table(shopping_world.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
 
-# show policy extraction
-# QLearning
+def Experiment4 (shop_world, shopping_world):
+    Vsw = value_iteration(shopping_world, .01)
+    # print('State     Money Saved')
+    print(' \n Shopping World \n Rewards of each state at the beginning.')
+    print_table(shop_world, "", '      ')
 
+    print('\n', "State   Money Saved")
+    print(" (0,10)", " ", rounder(Vsw[(0, 10)], 2), "  Hit all 10 stores, NO COSTCO\n")
+    print(" (0,9)","  ", rounder(Vsw[(0, 9)], 2), "  Went to 9 stores then COSTCO\n")
+    print(" (0,8)", "  ", rounder(Vsw[(0, 8)], 2), "  Went to 8 stores then COSTCO\n")
+    print(" (0,7)", "  ", rounder(Vsw[(0, 7)], 2), "  Went to 7 stores then COSTCO\n")
+    print(" (0,6)", "  ", rounder(Vsw[(0, 6)], 2), "  Went to 6 stores then COSTCO\n")
+    print(" (0,5)", "  ", rounder(Vsw[(0, 5)], 2), "  Went to 5 stores then COSTCO\n")
+    print(" (0,4)", "  ", rounder(Vsw[(0, 4)], 2), "  Went to 4 stores then COSTCO\n")
+    print(" (0,3)", "  ", rounder(Vsw[(0, 3)], 2), "  Went to 3 stores then COSTCO\n")
+    print(" (0,2)", "  ", rounder(Vsw[(0, 2)], 2), "  Went to 2 stores then COSTCO\n")
+    print(" (0,1)", "  ", rounder(Vsw[(0, 1)], 2), "  Went to 1 store then COSTCO\n")
+    print(" (0,0)", "  ", rounder(Vsw[(0, 0)], 2), "  Went to directly to COSTCO\n")
 
-def Experiment3(midterm_world) :
+    print("Best Policy Found")
+    BPsw_1 = best_policy(shopping_world, Vsw)
+    print_table(shopping_world.to_arrows(BPsw_1), "", '  to COSTCO') #showing the "way"
+
+def Experiment5(midterm_world) :
 
     q_agent = QLearningAgent(midterm_world, Ne=5, Rplus=2, alpha = lambda n: 60. / (59 + n))
     #^^^ get agent with world
@@ -91,7 +119,7 @@ def Experiment3(midterm_world) :
     #print(q_agent.Q,"\n")
     print("\n\n\n")
 
-def Experiment4(shopping_world) :
+def Experiment6(shopping_world) :
     """QLearner notes
 north = (0, 1)
 south = (0,-1)
