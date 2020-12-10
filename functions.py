@@ -62,7 +62,7 @@ def Experiment3(midterm_world) :
     w = (-1, 0)
     e = (1, 0)
     dir= {(0, 1): "North ", (0,-1): "South ", (-1, 0): "West ", (1, 0): "East "}
-    states = [(0,0),(0,1),(1,0),(1,1),(2,0)] # list states here
+    states = [(0,0),(0,1),(1,0),(1,1),(0,2)] # list states here
     iterations = 200# 1000 # run q learn how many times
     list = [x for x in range(iterations + 1) if x % 50 == 0] # get every item div/??? in list
 

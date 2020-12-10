@@ -17,6 +17,7 @@ import numpy as np
 from utils import vector_add, turn_right, turn_left, turn_heading, print_table, rounder
 
 orientations = EAST, NORTH = [(1, 0), (0, 1)]
+#orientations = EAST, NORTH, SOUTH, WEST = [(1, 0), (0, 1), (0,-1), (-1, 0)]
 
 
 class MDP:
@@ -162,8 +163,8 @@ class GridMDP(MDP):
     def calculate_T(self, state, action):
         if action:
             return [(0.75, self.go(state, action)),
-                    (0.25, self.go(state, turn_right(action)))
-                    # ,(0.1, self.go(state, turn_left(action)))
+                    #(0.25, self.go(state, turn_right(action)))
+                     (0.25, self.go(state, turn_left(action)))
                    ]
         else:
             return [(0.0, state)]
@@ -250,6 +251,7 @@ def value_iteration2(mdp, epsilon=0.0001):
         print(rounder(U1[(0, 1)], 2), "  ", rounder(U1[(1, 1)], 2))
         print(rounder(U1[(0, 0)], 2), "  ", rounder(U1[(1, 0)], 2))
         i+=1
+
         for s in mdp.states:
             U1[s] = R(s) + gamma * max(sum(p * U[s1] for (p, s1) in T(s, a))
                                        for a in mdp.actions(s))
