@@ -163,8 +163,8 @@ class GridMDP(MDP):
     def calculate_T(self, state, action):
         if action:
             return [(0.75, self.go(state, action)),
-                    #(0.25, self.go(state, turn_right(action)))
-                     (0.25, self.go(state, turn_left(action)))
+                    (0.25, self.go(state, turn_right(action)))
+                     #(0.25, self.go(state, turn_left(action)))
                    ]
         else:
             return [(0.0, state)]
