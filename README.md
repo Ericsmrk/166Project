@@ -3,6 +3,7 @@
 
 # Software Used:
 # VSCode (Python Extension)
+# Jupyter Notebook
 # Python code for the book Artificial Intelligence: A Modern Approach
 # Reference: https://github.com/aimacode/aima-python
 # Discord
@@ -14,6 +15,8 @@
 
 # How To Run
 # Python 3.9.0
+# Python 3.8
+# pip install numpy==1.19.3
 
 # Contributions
 # -------------
@@ -26,15 +29,11 @@
 # Found/added support files
 #
 #
-# Monica Kann:
-#
-#
-#
 # Michael Novella:
 #
 #
 #
 # Vincent Weinberger:
-#
+# DEBUGGING
 #
 #
